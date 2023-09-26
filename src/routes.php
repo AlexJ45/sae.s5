@@ -6,7 +6,11 @@ $routes = [
         'method' => ['GET'],
         'script' => 'login.php',
     ],
-
+    [
+        'route' => ['/etudiant/dashboard'],
+        'method' => ['GET'],
+        'script' => 'zut.php',
+    ],
     [
         'route' => ['/404'],
         'method' => ['GET'],

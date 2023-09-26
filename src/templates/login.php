@@ -37,15 +37,15 @@
     <body>
         <!-- Main Content -->
         <main>
-            <h1>Se connecter</h1>
+            <h1>Stage Dating</h1>
             <form action="" method="POST">
-                <div>
+                <div class="form-element">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" placeholder="Email" required>
+                    <input class='form-input input-style' type="email" name="email" id="email" placeholder="Email" required>
                 </div>
-                <div>
+                <div class="form-element">
                     <label for="password">Mot de passe</label>
-                    <div class="password-wrapper">
+                    <div class="password-wrapper input-style">
                             <input class="form-input"  type="password" name="password" id="password" placeholder="Mot de passe" required>
                             <label class="form-checkbox"><input class="form-toggle" type="checkbox" id="toggle-password">
                             <svg class="eye hide" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -66,10 +66,7 @@
                         }?>
                     </span>
                 </div>
-                <div >
-                    <input  type="submit" value="Se connecter">
-                    
-                </div>
+                <input class="form-validation" type="submit" value="Se connecter">
             </form>
         </main>
         <script>
