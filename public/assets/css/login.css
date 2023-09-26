@@ -1,4 +1,9 @@
-
+.password-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
 .form-checkbox {
   display: block;
   cursor: pointer;

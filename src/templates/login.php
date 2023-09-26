@@ -45,7 +45,7 @@
                 </div>
                 <div>
                     <label for="password">Mot de passe</label>
-                   
+                    <div class="password-wrapper">
                             <input class="form-input"  type="password" name="password" id="password" placeholder="Mot de passe" required>
                             <label class="form-checkbox"><input class="form-toggle" type="checkbox" id="toggle-password">
                             <svg class="eye hide" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -58,7 +58,7 @@
                                 c2.7,0,4.8-2.2,4.8-4.8C16.8,10.7,14.7,8.5,12,8.5z"/>
                             </svg></label>
                             
-                        
+                        </div>
                     
                     <span style="color:var(--red); ">
                         <?php if (isset($errors)) {
