@@ -1,0 +1,25 @@
+
+.form-checkbox {
+  display: block;
+  cursor: pointer;
+}
+.form-toggle {
+  display: none;
+}
+.eye {
+  color: var(--dark_gray);
+  height: 24px;
+  width: 24px;
+}
+.form-toggle ~ .visible {
+  display: none;
+}
+.form-toggle:checked ~ .visible {
+  display: inline-block;
+}
+.form-toggle:checked ~ .hide {
+  display: none;
+}
+.login-button:hover {
+  background-color: var(--primary_300);
+}
