@@ -19,7 +19,7 @@
         <div id="header-div">
             <a href="">
                 <section id="logout">
-                    <img src="/public/assets/img/vector.png" alt="se déconnecter">
+                    <img src="./assets/medias/images/vector.png" alt="se déconnecter">
                 </section>
             </a>
         </div>

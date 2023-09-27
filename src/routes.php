@@ -7,7 +7,11 @@ $routes = [
         'script' => 'login.php',
     ],
     [
-
+        'route' => ['/logout'],
+        'method' => ['GET'],
+        'script' => 'logout.php',
+    ],
+    [
         'route' => ['/etudiant/dashboard'],
         'method' => ['GET'],
         'script' => 'etu/dashboard.php',

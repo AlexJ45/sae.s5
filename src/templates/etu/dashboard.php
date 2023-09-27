@@ -1,16 +1,15 @@
 <?php
     $formation = Formation::getInstance()->find($user['id_formation']);
-    $entreprise = Entreprise::getInstance()->findAll();
+    $entreprises = Entreprise::getInstance()->findAll();
     $inscriptions = Postuler::getInstance()->findby(['id_etudiant' => $user['id']]);
     ?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Étudiant dashboard</title>
+    <title>Étudiant Dashboard</title>
     <link rel="icon" href="./favicon.ico">
     <link rel="stylesheet" href="/assets/css/etu-dashboard.css">
 </head>
@@ -19,9 +18,9 @@
     <header>
 
         <div id="header-div">
-            <a href="">
+            <a href="/logout">
                 <section id="logout">
-                    <img src="/public/assets/img/logout.png" alt="">
+                    <img src="./assets/media/images/logout.png" alt="">
                 </section>
             </a>
         </div>
@@ -47,11 +46,17 @@
         <div class="main-mid">
             <h2 class="titre">Entreprises disponibles</h2>
             <div class="block-entreprise">
+            <?php
+                foreach ($entreprises as $entreprise) {
+                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+                    ?>
                 <div>
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
-                            <div class="entreprise-nom">Schneider electric</div>
-                            <div class="entreprise-fichier">document1.pdf</div>
+                            <div class="entreprise-nom"><?php echo $entreprise['nom_entreprise']; ?></div>
+                            <?php foreach ($offres as $offre) {?>
+                                <a class="entreprise-fichier"href="./assets/medias/documents/<?php echo $offre['fichier_offre']; ?>" target="_blank"><?php echo $offre['fichier_offre']; ?></a>
+                           <?php }?>
                         </div>
                     </div>
                     <button class="button">
@@ -61,18 +66,17 @@
                         </div>
                     </button>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
         <div class="main-mid d-none">
             <h2 class="titre">Mes inscriptions</h2>
-            
-            
-           
             <div class="block-entreprise">
                 <?php foreach ($inscriptions as $inscription) {
                     $entreprise = Entreprise::getInstance()->find($inscription['id_entreprise']);
-                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id']]); ?>
+                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+                    ?>
                 <div style="align-self: stretch; height: 102px; padding: 16px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.20); border-radius: 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
