@@ -35,8 +35,8 @@
             </div>
             <div id="inscription">Fin des inscriptions : 
                 <?php
-                    $date = date_create($formation['date_fin_insc']);
-    echo date_format($date, 'd/m/Y');
+                    $date = date(date_format(date_create($formation['date_fin_insc']), 'd/m/Y'));
+    echo $date;
     ?>
             </div>
             <div id="menu">
@@ -48,7 +48,7 @@
             <h2 class="titre">Entreprises disponibles</h2>
             <div class="block-entreprise">
             <?php
-            dump($entreprises);
+
     foreach ($entreprises as $entreprise) {
         $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
         ?>
@@ -61,12 +61,15 @@
                            <?php }?>
                         </div>
                     </div>
-                    <button class="button">
-                        <div class="texte-button">M’inscrire</div>
-                        <div class="arrow">
+                    <?php $date = date_create($formation['date_fin_insc']);
 
-                        </div>
-                    </button>
+        $current_date = new DateTime();
+
+        if ($date >= $current_date) {?>
+                        <button class="button">
+                            <div class="texte-button">M’inscrire</div>
+                        </button>
+                    <?php } ?> 
                 </div>
                 <?php } ?>
             </div>
