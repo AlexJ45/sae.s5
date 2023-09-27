@@ -2,7 +2,7 @@
 
 class Etudiant extends Model
 {
-    protected $tableName = APP_TABLE_PREFIX.'Etudiant';
+    protected $tableName = APP_TABLE_PREFIX.'etudiant';
     protected static $instance;
 
     public static function getInstance()

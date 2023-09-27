@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> fa6137deabcc371ccd691224b3f2301b40d88fe6
 @import url(./main.css);
 .password-wrapper {
   display: flex;
@@ -19,9 +24,34 @@
   padding-left: 1rem;
   background: none;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa6137deabcc371ccd691224b3f2301b40d88fe6
 .form-checkbox {
   display: block;
   cursor: pointer;
+}
+@font-face {
+  font-family: "GeneralSans";
+  src: url(./../fonts/GeneralSans_Complete/Fonts/OTF/GeneralSans-Regular.otf);
+}
+
+h1 {
+  display: flex;
+  width: 322px;
+  height: 54px;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--bleu-fonc, #153142);
+  text-align: center;
+  font-family: "GeneralSans";
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-variant: all-small-caps;
 }
 .form-toggle {
   display: none;
@@ -88,4 +118,20 @@ h1 {
   font-weight: 700;
 
   font-variant: all-small-caps;
+<<<<<<< HEAD
+=======
+}
+#div-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+}
+.div-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+>>>>>>> fa6137deabcc371ccd691224b3f2301b40d88fe6
 }

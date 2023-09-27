@@ -3,6 +3,10 @@
 /* Fichier : Config/config.local.php */
 
 // le nom de la base
+<<<<<<< HEAD
+=======
+
+>>>>>>> fa6137deabcc371ccd691224b3f2301b40d88fe6
 define('APP_DB_NAME', 'sae_s5');
 
 // le nom de la machine qui héberge le serveur MYSQL

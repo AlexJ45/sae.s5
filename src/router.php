@@ -1,10 +1,6 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['load'])) {
-    $_SESSION['loaded'] = false;
-    $_SESSION['email'] = false;
-}
 
 require 'routes.php';
 
@@ -16,7 +12,7 @@ $route = $route === '' ? '/' : $route;
 foreach ($routes as $r) {
     if (in_array($route, $r['route']) && in_array($_SERVER['REQUEST_METHOD'], $r['method'])) {
         if (str_contains($route, '/responsable')) {
-            if (isset($_SESSION['email']) && isset($_SESSION['loaded'])) {
+            if (isset($_SESSION['email']) && isset($_SESSION['loaded']) && $_SESSION['loaded'] == true) {
                 $user = Formation::getInstance()->findBy(['email_resp_stage' => $_SESSION['email']]);
                 $user = $user[0];
                 require 'templates/'.$r['script'];
@@ -26,7 +22,7 @@ foreach ($routes as $r) {
             exit;
         }
         if (str_contains($route, '/etudiant')) {
-            if (isset($_SESSION['email']) && isset($_SESSION['loaded'])) {
+            if (isset($_SESSION['email']) && isset($_SESSION['loaded']) && $_SESSION['loaded'] == true) {
                 $user = Etudiant::getInstance()->findBy(['email_etudiant' => $_SESSION['email']]);
                 $user = $user[0];
                 require 'templates/'.$r['script'];
