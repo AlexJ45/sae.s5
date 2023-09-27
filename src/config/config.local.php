@@ -3,7 +3,9 @@
 /* Fichier : Config/config.local.php */
 
 // le nom de la base
-define('APP_DB_NAME', 'sae.s5');
+
+define('APP_DB_NAME', 'sae_s5');
+
 
 // le nom de la machine qui héberge le serveur MYSQL
 define('APP_DB_HOST', 'localhost');

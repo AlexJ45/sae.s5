@@ -3,16 +3,17 @@
 $routes = [
     [
         'route' => ['/'],
-        'method' => ['GET'],
+        'method' => ['GET', 'POST'],
         'script' => 'login.php',
     ],
     [
-        'route' => ['/etu/dashboard'],
+
+        'route' => ['/etudiant/dashboard'],
         'method' => ['GET'],
         'script' => 'etu/dashboard.php',
     ],
     [
-        'route' => ['/resp/dashboard'],
+        'route' => ['/responsable/dashboard'],
         'method' => ['GET'],
         'script' => 'resp/dashboard.php',
     ],
