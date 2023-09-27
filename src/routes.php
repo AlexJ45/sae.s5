@@ -7,10 +7,17 @@ $routes = [
         'script' => 'login.php',
     ],
     [
+
         'route' => ['/etudiant/dashboard'],
         'method' => ['GET'],
-        'script' => 'zut.php',
+        'script' => 'etu/dashboard.php',
     ],
+    [
+        'route' => ['/responsable/dashboard'],
+        'method' => ['GET'],
+        'script' => 'resp/dashboard.php',
+    ],
+
     [
         'route' => ['/404'],
         'method' => ['GET'],

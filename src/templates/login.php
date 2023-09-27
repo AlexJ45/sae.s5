@@ -1,29 +1,41 @@
 <?php
- if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-     $user = Formation::getInstance()->findBy(['email_resp_stage' => $_POST['email']]);
-     if ($user) {
-         $user = $user[0];
-         if ($_POST['password'] == $user['mp_resp_stage']) {
-             $_SESSION['loaded'] = true;
-             $_SESSION['email'] = $user['email_resp_stage'];
-             HTTP::redirect('/responsable/dashboard');
-         }
-     } else {
-         $user = Etudiant::getInstance()->findBy(['email_etudiant' => $_POST['email']]);
-         if ($user) {
-             $user = $user[0];
-             if ($_POST['password'] == $user['mp_etudiant']) {
-                 $_SESSION['loaded'] = true;
-                 $_SESSION['email'] = $user['email_etudiant'];
-                 HTTP::redirect('/etudiant/dashboard');
-             } else {
-                 $errors = 'Identifiants invalides';
-             }
-         }
-     }
- }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $user = Formation::getInstance()->findBy(['email_resp_stage' => $_POST['email']]);
+    if ($user) {
+        $user = $user[0];
+        if ($_POST['password'] == $user['mp_resp_stage']) {
+            $_SESSION['loaded'] = true;
+            $_SESSION['email'] = $user['email_resp_stage'];
+            $prenom = $user['prenom_resp_stage'];
+            $nom = $user['nomresp_stage'];
 
- ?>
+
+            $_SESSION['prenomresp_stage'] = $prenom;
+            $_SESSION['nomresp_stage'] = $nom;
+            HTTP::redirect('/responsable/dashboard');
+        }
+    } else {
+        $user = Etudiant::getInstance()->findBy(['email_etudiant' => $_POST['email']]);
+        if ($user) {
+            $user = $user[0];
+            if ($_POST['password'] == $user['mp_etudiant']) {
+                $_SESSION['loaded'] = true;
+                $_SESSION['email'] = $user['email_etudiant'];
+                $prenom = $user['prenom_etudiant'];
+                $nom = $user['nom_etudiant'];
+
+
+                $_SESSION['prenom_etudiant'] = $prenom;
+                $_SESSION['nom_etudiant'] = $nom;
+                HTTP::redirect('/etudiant/dashboard');
+            } else {
+                $errors = 'Identifiants invalides';
+            }
+        }
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -63,7 +75,7 @@
                     <span style="color:var(--red); ">
                         <?php if (isset($errors)) {
                             echo $errors;
-                        }?>
+                        } ?>
                     </span>
                 </div>
                 <input class="form-validation" type="submit" value="Se connecter">
