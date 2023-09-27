@@ -1,10 +1,6 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['load'])) {
-    $_SESSION['loaded'] = false;
-    $_SESSION['email'] = false;
-}
 
 require 'routes.php';
 
