@@ -1,4 +1,24 @@
-
+@import url(./main.css);
+.password-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.625rem;
+}
+.input-style {
+  border-radius: 10px;
+  background: var(--blanc);
+  padding-right: 1rem;
+  width: 100%;
+  box-shadow: var(--ombre);
+}
+.form-input {
+  border: none;
+  width: 100%;
+  padding: 1rem 0;
+  padding-left: 1rem;
+  background: none;
+}
 .form-checkbox {
   display: block;
   cursor: pointer;
@@ -7,7 +27,7 @@
   display: none;
 }
 .eye {
-  color: var(--dark_gray);
+  color: var(--bleu-fonce);
   height: 24px;
   width: 24px;
 }
@@ -20,6 +40,52 @@
 .form-toggle:checked ~ .hide {
   display: none;
 }
-.login-button:hover {
-  background-color: var(--primary_300);
+.form-validation {
+  display: flex;
+  padding: 1.5rem 2rem;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: none;
+  border-radius: 16px;
+  background: var(--bleu-clair);
+  color: var(--blanc);
+  font-size: 1.25rem;
+}
+label {
+  font-size: 2rem;
+}
+.form-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  align-self: stretch;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 65vw;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  width: 100vw;
+  height: 100vh;
+}
+h1 {
+  color: var(--bleu-fonce);
+  text-align: center;
+  font-family: Signika;
+  font-size: 4rem;
+
+  font-weight: 700;
+
+  font-variant: all-small-caps;
 }
