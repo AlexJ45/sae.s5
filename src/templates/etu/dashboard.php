@@ -61,10 +61,8 @@
                            <?php }?>
                         </div>
                     </div>
-                    <?php $date = date_create($formation['date_fin_insc']);
-
+                    <?php $date = new DateTime($formation['date_fin_insc']);
         $current_date = new DateTime();
-
         if ($date >= $current_date) {?>
                         <button class="button">
                             <div class="texte-button">M’inscrire</div>
