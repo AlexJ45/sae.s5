@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
 
         <div id="header-div">
-            <a href="">
+            <a href="/logout">
                 <section id="logout">
                     <img src="/public/assets/img/vector.png" alt="se déconnecter">
                 </section>
