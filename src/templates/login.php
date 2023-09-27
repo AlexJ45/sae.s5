@@ -6,9 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['password'] == $user['mp_resp_stage']) {
             $_SESSION['loaded'] = true;
             $_SESSION['email'] = $user['email_resp_stage'];
-
-
-
             HTTP::redirect('/responsable/dashboard');
         }
     } else {
@@ -18,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['password'] == $user['mp_etudiant']) {
                 $_SESSION['loaded'] = true;
                 $_SESSION['email'] = $user['email_etudiant'];
-
                 HTTP::redirect('/etudiant/dashboard');
             } else {
                 $errors = 'Identifiants invalides';

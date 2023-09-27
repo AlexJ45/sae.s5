@@ -7,7 +7,11 @@ $routes = [
         'script' => 'login.php',
     ],
     [
-
+        'route' => ['/logout'],
+        'method' => ['GET'],
+        'script' => 'logout.php',
+    ],
+    [
         'route' => ['/etudiant/dashboard'],
         'method' => ['GET'],
         'script' => 'etu/dashboard.php',
@@ -27,10 +31,5 @@ $routes = [
         'route' => ['/403'],
         'method' => ['GET'],
         'script' => '403.php',
-    ],
-    [
-        'route' => ['/301'],
-        'method' => ['GET'],
-        'script' => '301.php',
     ],
 ];

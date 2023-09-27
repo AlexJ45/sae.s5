@@ -1,28 +1,16 @@
 <?php
-/*
-require('./../../Entity/Etudiant.php');
-session_start();
+    $formation = Formation::getInstance()->find($user['id_formation']);
+    $entreprises = Entreprise::getInstance()->findByFormation($user['id_formation']);
+    $inscriptions = Postuler::getInstance()->findby(['id_etudiant' => $user['id']]);
 
-
-if (!isset($_SESSION['loaded']) || $_SESSION['loaded'] !== true || !isset($_SESSION['email'])) {
-    // Si l'utilisateur n'est pas connecté, redirigez-le vers la page de connexion
-    header("Location: /connexion.php");
-    exit;
-}
-
-
-$prenom = $_SESSION['prenom_etudiant'];
-$nom = $_SESSION['nom_etudiant'];
-*/
-?>
+    ?>
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Étudiant dashboard</title>
+    <title>Étudiant Dashboard</title>
     <link rel="icon" href="./favicon.ico">
     <link rel="stylesheet" href="/assets/css/etu-dashboard.css">
 </head>
@@ -31,9 +19,9 @@ $nom = $_SESSION['nom_etudiant'];
     <header>
 
         <div id="header-div">
-            <a href="">
+            <a href="/logout">
                 <section id="logout">
-                    <img src="/public/assets/img/logout.png" alt="">
+                    <img src="./assets/media/images/logout.png" alt="">
                 </section>
             </a>
         </div>
@@ -42,10 +30,15 @@ $nom = $_SESSION['nom_etudiant'];
     <main>
         <div id="main-top">
             <div id="name-div">
-                <p id="prenom">Sergio</p>
-                <p id="nom"> BOUIN NAVE RODRIGUES </p>
+                <p id="prenom"><?php echo $user['prenom_etudiant']; ?></p>
+                <p id="nom"><?php echo $user['nom_etudiant']; ?> </p>
             </div>
-            <div id="inscription">Fin des inscriptions : 22/12/2021</div>
+            <div id="inscription">Fin des inscriptions : 
+                <?php
+                    $date = date_create($formation['date_fin_insc']);
+    echo date_format($date, 'd/m/Y');
+    ?>
+            </div>
             <div id="menu">
                 <div class="menu-choix choix-actif">Entreprises</div>
                 <div class="menu-choix">Mes inscriptions</div>
@@ -54,11 +47,18 @@ $nom = $_SESSION['nom_etudiant'];
         <div class="main-mid">
             <h2 class="titre">Entreprises disponibles</h2>
             <div class="block-entreprise">
+            <?php
+            dump($entreprises);
+    foreach ($entreprises as $entreprise) {
+        $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+        ?>
                 <div>
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
-                            <div class="entreprise-nom">Schneider electric</div>
-                            <div class="entreprise-fichier">document1.pdf</div>
+                            <div class="entreprise-nom"><?php echo $entreprise['nom_entreprise']; ?></div>
+                            <?php foreach ($offres as $offre) {?>
+                                <a class="entreprise-fichier"href="./assets/medias/documents/<?php echo $offre['fichier_offre']; ?>" target="_blank"><?php echo $offre['fichier_offre']; ?></a>
+                           <?php }?>
                         </div>
                     </div>
                     <button class="button">
@@ -68,28 +68,35 @@ $nom = $_SESSION['nom_etudiant'];
                         </div>
                     </button>
                 </div>
+                <?php } ?>
             </div>
         </div>
 
         <div class="main-mid d-none">
             <h2 class="titre">Mes inscriptions</h2>
             <div class="block-entreprise">
+                <?php foreach ($inscriptions as $inscription) {
+                    $entreprise = Entreprise::getInstance()->find($inscription['id_entreprise']);
+                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+                    ?>
                 <div style="align-self: stretch; height: 102px; padding: 16px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.20); border-radius: 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
-                            <div class="entreprise-nom">Schneider electric</div>
-                            <div class="entreprise-fichier">document1.pdf</div>
+                            <div class="entreprise-nom"><?php echo $entreprise['nom_entreprise']; ?></div>
+                            <?php foreach ($offres as $offre) {?>
+                                <a class="entreprise-fichier"href="./assets/medias/documents/<?php echo $offre['fichier_offre']; ?>" target="_blank"><?php echo $offre['fichier_offre']; ?></a>
+                           <?php }?>
                         </div>
                     </div>
                 </div>
+                <?php } ?>
             </div>
+            
         </div>
     </main>
     <script>
         const entrepriseButton = document.querySelector('.menu-choix.choix-actif');
         const inscriptionsButton = document.querySelector('.menu-choix:not(.choix-actif)');
-
-
         const entrepriseDiv = document.querySelector('.main-mid:not(.d-none)');
         const inscriptionsDiv = document.querySelector('.main-mid.d-none');
 

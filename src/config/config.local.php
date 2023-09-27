@@ -6,7 +6,6 @@
 
 define('APP_DB_NAME', 'sae_s5');
 
-
 // le nom de la machine qui héberge le serveur MYSQL
 define('APP_DB_HOST', 'localhost');
 
