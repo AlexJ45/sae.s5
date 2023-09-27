@@ -21,9 +21,4 @@ $routes = [
         'method' => ['GET'],
         'script' => '403.php',
     ],
-    [
-        'route' => ['/301'],
-        'method' => ['GET'],
-        'script' => '301.php',
-    ],
 ];
