@@ -3,14 +3,19 @@
 $routes = [
     [
         'route' => ['/'],
-        'method' => ['GET'],
+        'method' => ['GET', 'POST'],
         'script' => 'login.php',
     ],
-    
     [
-        'route' => ['/'],
+
+        'route' => ['/etudiant/dashboard'],
         'method' => ['GET'],
-        'script' => 'login.php',
+        'script' => 'etu/dashboard.php',
+    ],
+    [
+        'route' => ['/responsable/dashboard'],
+        'method' => ['GET'],
+        'script' => 'resp/dashboard.php',
     ],
 
     [
@@ -22,10 +27,5 @@ $routes = [
         'route' => ['/403'],
         'method' => ['GET'],
         'script' => '403.php',
-    ],
-    [
-        'route' => ['/301'],
-        'method' => ['GET'],
-        'script' => '301.php',
     ],
 ];
