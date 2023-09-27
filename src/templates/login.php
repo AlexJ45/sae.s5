@@ -6,12 +6,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_POST['password'] == $user['mp_resp_stage']) {
             $_SESSION['loaded'] = true;
             $_SESSION['email'] = $user['email_resp_stage'];
-            $prenom = $user['prenom_resp_stage'];
-            $nom = $user['nomresp_stage'];
-
-
-            $_SESSION['prenomresp_stage'] = $prenom;
-            $_SESSION['nomresp_stage'] = $nom;
             HTTP::redirect('/responsable/dashboard');
         }
     } else {
@@ -21,12 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($_POST['password'] == $user['mp_etudiant']) {
                 $_SESSION['loaded'] = true;
                 $_SESSION['email'] = $user['email_etudiant'];
-                $prenom = $user['prenom_etudiant'];
-                $nom = $user['nom_etudiant'];
-
-
-                $_SESSION['prenom_etudiant'] = $prenom;
-                $_SESSION['nom_etudiant'] = $nom;
                 HTTP::redirect('/etudiant/dashboard');
             } else {
                 $errors = 'Identifiants invalides';
