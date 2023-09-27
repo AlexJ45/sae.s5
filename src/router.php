@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION['load'])) {
+if (!isset($_SESSION['loaded'])) {
     $_SESSION['loaded'] = false;
     $_SESSION['email'] = false;
 }
@@ -19,7 +19,7 @@ foreach ($routes as $r) {
             if (isset($_SESSION['email']) && isset($_SESSION['loaded'])) {
                 $user = Formation::getInstance()->findBy(['email_resp_stage' => $_SESSION['email']]);
                 $user = $user[0];
-                require 'templates/'.$r['script'];
+                require 'templates/' . $r['script'];
                 exit;
             }
             require 'templates/403.php';
@@ -29,13 +29,13 @@ foreach ($routes as $r) {
             if (isset($_SESSION['email']) && isset($_SESSION['loaded'])) {
                 $user = Etudiant::getInstance()->findBy(['email_etudiant' => $_SESSION['email']]);
                 $user = $user[0];
-                require 'templates/'.$r['script'];
+                require 'templates/' . $r['script'];
                 exit;
             }
             require 'templates/403.php';
             exit;
         }
-        require 'templates/'.$r['script'];
+        require 'templates/' . $r['script'];
         exit;
     }
 }

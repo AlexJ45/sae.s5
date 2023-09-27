@@ -6,6 +6,16 @@ $routes = [
         'method' => ['GET'],
         'script' => 'login.php',
     ],
+    [
+        'route' => ['/etu/dashboard'],
+        'method' => ['GET'],
+        'script' => 'etu/dashboard.php',
+    ],
+    [
+        'route' => ['/resp/dashboard'],
+        'method' => ['GET'],
+        'script' => 'resp/dashboard.php',
+    ],
 
     [
         'route' => ['/404'],
