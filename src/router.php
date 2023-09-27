@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 
 
 require 'routes.php';
@@ -13,7 +13,9 @@ foreach ($routes as $r) {
     if (in_array($route, $r['route']) && in_array($_SERVER['REQUEST_METHOD'], $r['method'])) {
         if (str_contains($route, '/responsable')) {
             if (isset($_SESSION['email']) && isset($_SESSION['loaded'])) {
+
                 $user = Formation::getInstance()->findBy(['email_resp_stage' => $_SESSION['email']]);
+
                 $user = $user[0];
                 require 'templates/' . $r['script'];
                 exit;

@@ -103,6 +103,7 @@ main {
   font-size: 16px;
   font-weight: 400;
   word-wrap: break-word;
+  cursor: pointer;
 }
 .choix-actif {
   font-family: "GeneralSans-bold";
