@@ -1,7 +1,8 @@
 <?php
     $formation = Formation::getInstance()->find($user['id_formation']);
-    $entreprises = Entreprise::getInstance()->findAll();
+    $entreprises = Entreprise::getInstance()->findByFormation($user['id_formation']);
     $inscriptions = Postuler::getInstance()->findby(['id_etudiant' => $user['id']]);
+
     ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -47,9 +48,10 @@
             <h2 class="titre">Entreprises disponibles</h2>
             <div class="block-entreprise">
             <?php
-                foreach ($entreprises as $entreprise) {
-                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
-                    ?>
+            dump($entreprises);
+    foreach ($entreprises as $entreprise) {
+        $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+        ?>
                 <div>
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
