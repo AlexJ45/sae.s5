@@ -1,7 +1,10 @@
 <?php
-    $formation = Formation::getInstance()->find($user['id_formation']);
-    $entreprises = Entreprise::getInstance()->findByFormation($user['id_formation']);
-    $inscriptions = Postuler::getInstance()->findby(['id_etudiant' => $user['id']]);
+    $formation = Formation::getInstance()->findBy(['id_formation' => $user['id_formation']]);
+    $formation = $formation[0];
+    dump($formation['id_formation']);
+    $entreprises = Entreprise::getInstance()->findByFormation($formation['id_formation']);
+
+    $inscriptions = Postuler::getInstance()->findBy(['id_etudiant' => $user['id_etudiant']]);
 
     ?>
 <!DOCTYPE html>
@@ -50,7 +53,8 @@
             <?php
 
     foreach ($entreprises as $entreprise) {
-        $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+        dump(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
+        $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
         ?>
                 <div>
                     <div class="entreprise">
@@ -77,8 +81,12 @@
             <h2 class="titre">Mes inscriptions</h2>
             <div class="block-entreprise">
                 <?php foreach ($inscriptions as $inscription) {
-                    $entreprise = Entreprise::getInstance()->find($inscription['id_entreprise']);
-                    $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id'], 'id_formation' => $formation['id']]);
+                    $entreprise = Entreprise::getInstance()->findBy(['id_entreprise' => $inscription['id_entreprise']]);
+
+                    $entreprise = $entreprise[0];
+
+                    $offres = Offre::getInstance()->findBy(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
+                    dump($offres);
                     ?>
                 <div style="align-self: stretch; height: 102px; padding: 16px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.20); border-radius: 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
                     <div class="entreprise">
