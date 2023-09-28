@@ -13,7 +13,7 @@ $routes = [
     ],
     [
         'route' => ['/etudiant/dashboard'],
-        'method' => ['GET'],
+        'method' => ['GET', 'POST'],
         'script' => 'etu/dashboard.php',
     ],
     [

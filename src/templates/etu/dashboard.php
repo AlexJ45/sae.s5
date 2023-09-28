@@ -1,12 +1,15 @@
 <?php
-    $formation = Formation::getInstance()->findBy(['id_formation' => $user['id_formation']]);
-    $formation = $formation[0];
-    dump($formation['id_formation']);
-    $entreprises = Entreprise::getInstance()->findByFormation($formation['id_formation']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    Postuler::getInstance()->create([
+        'id_entreprise' => $_POST['id_entreprise'],
+        'id_etudiant' => $user['id_etudiant'],
+      ]);
+}$formation = Formation::getInstance()->findBy(['id_formation' => $user['id_formation']]);
+$formation = $formation[0];
+$entreprises = Entreprise::getInstance()->findByFormation($formation['id_formation']);
+$inscriptions = Postuler::getInstance()->findBy(['id_etudiant' => $user['id_etudiant']]);
 
-    $inscriptions = Postuler::getInstance()->findBy(['id_etudiant' => $user['id_etudiant']]);
-
-    ?>
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -24,7 +27,7 @@
         <div id="header-div">
             <a href="/logout">
                 <section id="logout">
-                    <img src="./assets/media/images/logout.png" alt="">
+                    <img src="/assets/medias/images/logout.png" alt="">
                 </section>
             </a>
         </div>
@@ -38,9 +41,9 @@
             </div>
             <div id="inscription">Fin des inscriptions : 
                 <?php
-                    $date = date(date_format(date_create($formation['date_fin_insc']), 'd/m/Y'));
-    echo $date;
-    ?>
+                $date = date(date_format(date_create($formation['date_fin_insc']), 'd/m/Y'));
+echo $date;
+?>
             </div>
             <div id="menu">
                 <div class="menu-choix choix-actif">Entreprises</div>
@@ -52,28 +55,41 @@
             <div class="block-entreprise">
             <?php
 
-    foreach ($entreprises as $entreprise) {
-        dump(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
+foreach ($entreprises as $entreprise) {
+    $inscriptions_entreprise = [];
+    foreach ($inscriptions as $inscription) {
+        array_push($inscriptions_entreprise, $inscription['id_entreprise']);
+    }
+    if (!in_array($entreprise['id_entreprise'], $inscriptions_entreprise)) {
         $offres = Offre::getInstance()->findby(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
+
         ?>
                 <div>
                     <div class="entreprise">
                         <div style="flex-direction: column; justify-content: center; align-items: flex-start; gap: 10px; display: flex">
                             <div class="entreprise-nom"><?php echo $entreprise['nom_entreprise']; ?></div>
                             <?php foreach ($offres as $offre) {?>
-                                <a class="entreprise-fichier"href="./assets/medias/documents/<?php echo $offre['fichier_offre']; ?>" target="_blank"><?php echo $offre['fichier_offre']; ?></a>
+                                <a class="entreprise-fichier" href="/assets/medias/documents/<?php echo $offre['fichier_offre']; ?>"  target="_blank"><?php echo $offre['fichier_offre']; ?></a>
                            <?php }?>
                         </div>
                     </div>
                     <?php $date = new DateTime($formation['date_fin_insc']);
         $current_date = new DateTime();
-        if ($date >= $current_date) {?>
+        if ($date >= $current_date && count($inscriptions) < $formation['nbr_max_entretiens']) {?>
+                    <form action="" method="POST">
+                        <input type="hidden" name='id_entreprise' value="<?php echo $entreprise['id_entreprise']; ?>">
                         <button class="button">
-                            <div class="texte-button">M’inscrire</div>
+                            <div class="texte-button">M’inscrire 
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.2558 9.41089L11.4225 3.57756C11.0971 3.25214 10.5696 3.25214 10.2442 3.57756C9.91875 3.90298 9.91875 4.43047 10.2442 4.75589L14.655 9.16673H3.33333C2.87333 9.16673 2.5 9.54006 2.5 10.0001C2.5 10.4601 2.87333 10.8334 3.33333 10.8334H14.655L10.2442 15.2442C9.91875 15.5696 9.91875 16.0971 10.2442 16.4226C10.4071 16.5855 10.62 16.6667 10.8333 16.6667C11.0467 16.6667 11.2596 16.5855 11.4225 16.4226L17.2558 10.5892C17.5813 10.2638 17.5813 9.73631 17.2558 9.41089Z" fill="currentColor"/>
+                                </svg>
+                            </div>
                         </button>
+                    </form>
                     <?php } ?> 
                 </div>
-                <?php } ?>
+                <?php }
+    } ?>
             </div>
         </div>
 
@@ -82,11 +98,8 @@
             <div class="block-entreprise">
                 <?php foreach ($inscriptions as $inscription) {
                     $entreprise = Entreprise::getInstance()->findBy(['id_entreprise' => $inscription['id_entreprise']]);
-
                     $entreprise = $entreprise[0];
-
                     $offres = Offre::getInstance()->findBy(['id_entreprise' => $entreprise['id_entreprise'], 'id_formation' => $formation['id_formation']]);
-                    dump($offres);
                     ?>
                 <div style="align-self: stretch; height: 102px; padding: 16px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.20); border-radius: 16px; flex-direction: column; justify-content: center; align-items: flex-start; gap: 20px; display: flex">
                     <div class="entreprise">

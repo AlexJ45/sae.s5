@@ -194,6 +194,10 @@ main {
   font-weight: 500;
   word-wrap: break-word;
   font-family: "GeneralSans";
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
 }
 .arrow-button {
   width: 20px;

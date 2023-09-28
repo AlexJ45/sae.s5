@@ -4,7 +4,6 @@
 // Fichier: src\Model\Model.php
 //
 
-
 /**
  * Classe CRUD modèle qui contient les 7 méthodes :
  *   - findAll()                        pour rechercher toutes les données
@@ -13,7 +12,7 @@
  *   - create( array $datas )           pour ajouter une donnée
  *   - update( int $id, array $datas )  pour mettre à jour une donnée
  *   - delete( int $id )                pour effacer une donnée
- *   - exist( int $id )                 pour vérifier si une donnée existe
+ *   - exist( int $id )                 pour vérifier si une donnée existe.
  */
 class Model
 {
@@ -25,7 +24,7 @@ class Model
     {
         if (!self::$dbh) {
             try {
-                $dsn = 'mysql:host=' . APP_DB_HOST . ';dbname=' . APP_DB_NAME . ';charset=UTF8';
+                $dsn = 'mysql:host='.APP_DB_HOST.';dbname='.APP_DB_NAME.';charset=UTF8';
                 self::$dbh = new PDO(
                     $dsn,
                     // nom de l'utilisateur MYSQL
@@ -52,7 +51,7 @@ class Model
                 // echo "<h1>ERREUR</h1></p>";
                 echo '</div>';
                 // arrêt du script
-                die();
+                exit;
             }
         }
     }
@@ -60,7 +59,8 @@ class Model
     /**
      * Retourne les informations d'un identifiant.
      *
-     * @param  integer  $id identifiant
+     * @param int $id identifiant
+     *
      * @return array
      */
     public function find(int $id): ?array
@@ -93,7 +93,8 @@ class Model
     /**
      * Retourne les informations associées à un/des critères.
      *
-     * @param  array  $criterias le tableau des critères
+     * @param array $criterias le tableau des critères
+     *
      * @return array
      */
     public function findBy(array $criterias): ?array
@@ -113,15 +114,14 @@ class Model
     /**
      * Indique si l'identifiant existe déjà dans la base.
      *
-     * @param  integer  $id identifiant à tester.
-     * @return bool
+     * @param int $id identifiant à tester.
      */
     public function exists(int $id): bool
     {
         $sql = "SELECT COUNT(*) AS c FROM `{$this->tableName}` WHERE id = :id";
         $sth = $this->query($sql, [':id' => $id]);
         if ($sth) {
-            return ($sth->fetch()['c'] > 0);
+            return $sth->fetch()['c'] > 0;
         }
 
         return false;
@@ -130,23 +130,24 @@ class Model
     /**
      * Ajoute les nouvelles informations.
      *
-     * @param  array  $datas  données à ajouter organisées sous forme de tableau associatif.
-     * @return integer
+     * @param array $datas données à ajouter organisées sous forme de tableau associatif.
+     *
+     * @return int
      */
     public function create(array $datas): ?int
     {
-        $sql = 'INSERT INTO `' . $this->tableName . '` ( ';
+        $sql = 'INSERT INTO `'.$this->tableName.'` ( ';
         foreach (array_keys($datas) as $k) {
             $sql .= " {$k} ,";
         }
-        $sql = substr($sql, 0, strlen($sql) - 1) . ' ) VALUE (';
+        $sql = substr($sql, 0, strlen($sql) - 1).' ) VALUE (';
         foreach (array_keys($datas) as $k) {
             $sql .= " :{$k} ,";
         }
-        $sql = substr($sql, 0, strlen($sql) - 1) . ' )';
+        $sql = substr($sql, 0, strlen($sql) - 1).' )';
 
         foreach (array_keys($datas) as $k) {
-            $attributes[':' . $k] = $datas[$k];
+            $attributes[':'.$k] = $datas[$k];
         }
         $sth = $this->query($sql, $attributes);
         if ($sth) {
@@ -159,13 +160,12 @@ class Model
     /**
      * Édite les  informations d'un identifiant.
      *
-     * @param  integer  $id     identifiant à modifier.
-     * @param  array  $datas  tableau associatif des données à modifier.
-     * @return bool
+     * @param int   $id    identifiant à modifier.
+     * @param array $datas tableau associatif des données à modifier.
      */
     public function update(int $id, array $datas): bool
     {
-        $sql = 'UPDATE `' . $this->tableName . '` SET ';
+        $sql = 'UPDATE `'.$this->tableName.'` SET ';
         foreach (array_keys($datas) as $k) {
             $sql .= " {$k} = :{$k} ,";
         }
@@ -173,7 +173,7 @@ class Model
         $sql .= ' WHERE id =:id';
 
         foreach (array_keys($datas) as $k) {
-            $attributes[':' . $k] = $datas[$k];
+            $attributes[':'.$k] = $datas[$k];
         }
         $attributes[':id'] = $id;
         $sth = $this->query($sql, $attributes);
@@ -181,13 +181,12 @@ class Model
         return $sth->rowCount() > 0;
     }
 
-
-
     /**
      * Efface l'identifiant.
      *
-     * @param  integer  $id identifiant
-     * @return int|boolean
+     * @param int $id identifiant
+     *
+     * @return int|bool
      */
     public function delete(int $id): int
     {
@@ -200,8 +199,9 @@ class Model
     /**
      * Excécute une requète.
      *
-     * @param string $sql           expression SQL à traiter
-     * @param array $attributs      tableau des attributs
+     * @param string $sql       expression SQL à traiter
+     * @param array  $attributs tableau des attributs
+     *
      * @return void
      */
     public function query(string $sql, array $attributs = null)
