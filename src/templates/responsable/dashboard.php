@@ -13,6 +13,7 @@ $dateFinInscription = $user['date_fin_insc'];
 $dateFormateeFin = date('d/m/Y', strtotime($dateFinInscription));
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     try {
         Formation::getInstance()->update($formation['id_formation'], ['date_deb_insc' => $_POST['debut_inscriptions'], 'date_fin_insc' => $_POST['fin_inscriptions'], 'nb_max_entretiens' => $_POST['nb_max_entretiens']]);
         HTTP::redirect('/responsable/dashboard');
@@ -41,6 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <a href="/logout">
             <section id="logout">
                     <img src="/assets/medias/images/logout.png" alt="">
+            
+
                 </section>
             </a>
         </div>
@@ -62,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
                 <div style="width: 200px; height: 57px; color: #153142; font-size: 24px; font-family: Signika; font-weight: 700; word-wrap: break-word">Liste des étudiants</div>
                 <div style="width: 24px; height: 24px; position: relative">
-                    <div style="width: 20px; height: 19px; left: 2px; top: 2.50px; position: absolute; background: #153142"></div>
+                    <a href="/responsable/pdf" target='_blank' style="width: 20px; height: 19px; left: 2px; top: 2.50px; position: absolute; background: #153142"></a>
                 </div>
             </div>
             <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
@@ -113,6 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input style="color: #1A98C0; font-size: 24px; font-family: Palanquin; font-weight: 400; word-wrap: break-word; background-color:unset;" type="submit" value="Valider">
             </form>
         </div>
+
         <div class="main-mid d-none param">
             <h3 id="param-titre">Paramètres</h3>
             <button id="modif-button">Modifier</button>
@@ -127,6 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="param-div">
                     <p class="param-value" style="">Entretien(s) max par étudiant : <?php echo $user['nb_max_entretiens']; ?></p>
+
 
                 </div>
             </div>
