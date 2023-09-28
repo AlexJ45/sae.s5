@@ -21,6 +21,11 @@ $routes = [
         'method' => ['GET', 'POST'],
         'script' => 'responsable/dashboard.php',
     ],
+    [
+        'route' => ['/mail'],
+        'method' => ['GET', 'POST'],
+        'script' => 'envoyer-email.php',
+    ],
 
     [
         'route' => ['/404'],
