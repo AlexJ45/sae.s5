@@ -6,21 +6,18 @@ $formation = $formation[0];
 $etudiants = $etudiant->getEtudiantsTries($user['id_formation']);
 $occurrences = 0;
 
-
 $dateDebutInscription = $user['date_deb_insc'];
 $dateFormateeDebut = date('d/m/Y', strtotime($dateDebutInscription));
 
 $dateFinInscription = $user['date_fin_insc'];
 $dateFormateeFin = date('d/m/Y', strtotime($dateFinInscription));
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     try {
         Formation::getInstance()->update($formation['id_formation'], ['date_deb_insc' => $_POST['debut_inscriptions'], 'date_fin_insc' => $_POST['fin_inscriptions'], 'nb_max_entretiens' => $_POST['nb_max_entretiens']]);
         HTTP::redirect('/responsable/dashboard');
     } catch (PDOException $e) {
-        echo 'Une erreur s\'est produite : ' . $e->getMessage();
+        echo 'Une erreur s\'est produite : '.$e->getMessage();
     }
 }
 
@@ -42,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div id="header-div">
             <a href="/logout">
-                <section id="logout">
-                    <img src="/public/assets/img/vector.png" alt="se déconnecter">
+            <section id="logout">
+                    <img src="/assets/medias/images/logout.png" alt="">
                 </section>
             </a>
         </div>
@@ -52,10 +49,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <div id="main-top">
             <div id="name-div">
-                <p id="prenom"><?php echo $user['prenom_resp_stage'] ?></p>
-                <p id="nom"><?php echo $user['nom_resp_stage'] ?></p>
+                <p id="prenom"><?php echo $user['prenom_resp_stage']; ?></p>
+                <p id="nom"><?php echo $user['nom_resp_stage']; ?></p>
             </div>
-            <div id="inscription">Fin des inscriptions : <?php echo $dateFormateeFin ?></div>
+            <div id="inscription">Fin des inscriptions : <?php echo $dateFormateeFin; ?></div>
             <div id="menu">
                 <div class="menu-choix choix-actif">Étudiants</div>
                 <div class="menu-choix">Paramètres</div>
@@ -77,14 +74,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $occurrences = $etudiant['nombre_de_fois'];
                 $afficherDiv = $occurrences == 0;
 
-            ?>
+                ?>
                 <div class="block-etudiant">
                     <div class="etudiant-info">
                         <div>
                             <p class="nom"><?php echo $etudiant['nom_etudiant']; ?></p>
                             <p class="nom prenom"><?php echo $etudiant['prenom_etudiant']; ?></p>
                         </div>
-                        <p class="entretiens"><?php echo $occurrences ?></p>
+                        <p class="entretiens"><?php echo $occurrences; ?></p>
                     </div>
                     <p class="mail"><?php echo $etudiant['email_etudiant']; ?></p>
                     <?php if ($afficherDiv) { ?>
@@ -93,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <img class="cloche" src="">
                             </div>
                             <button id="rappel_<?php echo $etudiant['id_etudiant']; ?>" class="rappel-texte">Envoyer un rappel</button>
-                        </div><?php }; ?>
+                        </div><?php } ?>
                 </div>
             <?php } ?>
 
@@ -121,15 +118,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button id="modif-button">Modifier</button>
             <div class="div-params">
                 <div class="param-div">
-                    <p class="param-value">Début des inscriptions MMI : <?php echo $dateFormateeDebut ?></p>
+                    <p class="param-value">Début des inscriptions MMI : <?php echo $dateFormateeDebut; ?></p>
 
                 </div>
                 <div class="param-div">
-                    <p class="param-value">Fin des inscriptions MMI : <?php echo $dateFormateeFin ?></p>
+                    <p class="param-value">Fin des inscriptions MMI : <?php echo $dateFormateeFin; ?></p>
 
                 </div>
                 <div class="param-div">
-                    <p class="param-value" style="">Entretien(s) max par étudiant : <?php echo $user['nb_max_entretiens'] ?></p>
+                    <p class="param-value" style="">Entretien(s) max par étudiant : <?php echo $user['nb_max_entretiens']; ?></p>
 
                 </div>
             </div>
@@ -173,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     });
                 }
         <?php }
-        } ?>
+            } ?>
         const etudiantButton = document.querySelector('.menu-choix.choix-actif');
         const paramButton = document.querySelector('.menu-choix:not(.choix-actif)');
 

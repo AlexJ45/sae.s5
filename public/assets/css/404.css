@@ -1,5 +1,5 @@
 @import url('https://fonts.cdnfonts.com/css/general-sans');
-
+@import url(./main.css);
 .container{
     background: #f5f5f5;
     width: 100vw;
