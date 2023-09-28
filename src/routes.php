@@ -22,10 +22,18 @@ $routes = [
         'script' => 'responsable/dashboard.php',
     ],
     [
+
+        'route' => ['/mail'],
+        'method' => ['GET', 'POST'],
+        'script' => 'envoyer-email.php',
+    ],
+
+
         'route' => ['/responsable/pdf'],
         'method' => ['GET'],
         'script' => 'responsable/generate_pdf.php',
     ],
+
     [
         'route' => ['/404'],
         'method' => ['GET'],
