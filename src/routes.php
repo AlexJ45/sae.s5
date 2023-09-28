@@ -18,8 +18,8 @@ $routes = [
     ],
     [
         'route' => ['/responsable/dashboard'],
-        'method' => ['GET'],
-        'script' => 'resp/dashboard.php',
+        'method' => ['GET', 'POST'],
+        'script' => 'responsable/dashboard.php',
     ],
 
     [

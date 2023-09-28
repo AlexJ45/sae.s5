@@ -15,6 +15,7 @@ foreach ($routes as $r) {
         if (str_contains($route, '/responsable')) {
             if (isset($_SESSION['email']) && isset($_SESSION['loaded']) && $_SESSION['loaded'] == true) {
                 $user = Formation::getInstance()->findBy(['email_resp_stage' => $_SESSION['email']]);
+
                 $user = $user[0];
                 require 'templates/'.$r['script'];
                 exit;
