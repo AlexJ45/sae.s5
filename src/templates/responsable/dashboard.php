@@ -10,7 +10,6 @@ $dateFormateeFin = date('d/m/Y', strtotime($dateFinInscription));
 // traitement.php
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
     // Récupérer les nouvelles valeurs des paramètres depuis $_POST
     $nouveauDebutInscriptions = $_POST['debut_inscriptions'];
     $nouvelleFinInscriptions = $_POST['fin_inscriptions'];
@@ -36,10 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
 
         // Rediriger l'utilisateur vers une page de confirmation ou une autre page après la mise à jour
-
     } catch (PDOException $e) {
         // Gérez les erreurs PDO, affichez un message d'erreur approprié à l'utilisateur
-        echo 'Une erreur s\'est produite : ' . $e->getMessage();
+        echo 'Une erreur s\'est produite : '.$e->getMessage();
     }
 }
 
@@ -60,9 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
 
         <div id="header-div">
-            <a href="">
+            <a href="/logout">
                 <section id="logout">
-                    <img src="/public/assets/img/vector.png" alt="se déconnecter">
+                    <img src="/assets/medias/images/vector.png" alt="se déconnecter">
                 </section>
             </a>
         </div>
@@ -71,10 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <div id="main-top">
             <div id="name-div">
-                <p id="prenom"><?php echo $user['prenom_resp_stage'] ?></p>
-                <p id="nom"><?php echo $user['nom_resp_stage'] ?></p>
+                <p id="prenom"><?php echo $user['prenom_resp_stage']; ?></p>
+                <p id="nom"><?php echo $user['nom_resp_stage']; ?></p>
             </div>
-            <div id="inscription">Fin des inscriptions : <?php echo $dateFormateeFin ?></div>
+            <div id="inscription">Fin des inscriptions : <?php echo $dateFormateeFin; ?></div>
             <div id="menu">
                 <div class="menu-choix choix-actif">Étudiants</div>
                 <div class="menu-choix">Paramètres</div>
@@ -84,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div style=" align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
                 <div style="width: 200px; height: 57px; color: #153142; font-size: 24px; font-family: Signika; font-weight: 700; word-wrap: break-word">Liste des étudiants</div>
                 <div style="width: 24px; height: 24px; position: relative">
-                    <div style="width: 20px; height: 19px; left: 2px; top: 2.50px; position: absolute; background: #153142"></div>
+                    <a href="/responsable/pdf" target='_blank' style="width: 20px; height: 19px; left: 2px; top: 2.50px; position: absolute; background: #153142"></a>
                 </div>
             </div>
             <div style="align-self: stretch; justify-content: space-between; align-items: center; display: inline-flex">
@@ -130,15 +128,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <button id="modif-button" style="color: #1A98C0; font-size: 24px; font-family: Palanquin; font-weight: 400; word-wrap: break-word; background-color:unset;">Modifier</button>
             <div style="align-self: stretch; height: 456px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 24px; display: flex">
                 <div style="width: 382px; padding-left: 16px; padding-right: 16px; padding-top: 32px; padding-bottom: 32px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.15); border-radius: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                    <div style="width: 346px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Début des inscriptions MMI : <?php echo $dateFormateeDebut ?></div>
+                    <div style="width: 346px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Début des inscriptions MMI : <?php echo $dateFormateeDebut; ?></div>
 
                 </div>
                 <div style="width: 382px;  padding-left: 16px; padding-right: 16px; padding-top: 32px; padding-bottom: 32px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.15); border-radius: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                    <div style="width: 346px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Fin des inscriptions MMI : <?php echo $dateFormateeFin ?></div>
+                    <div style="width: 346px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Fin des inscriptions MMI : <?php echo $dateFormateeFin; ?></div>
 
                 </div>
                 <div style="width: 382px;  padding-top: 24px; padding-bottom: 32px; padding-left: 16px; padding-right: 16px; background: #F5F5F5; box-shadow: 10px 10px 30px rgba(16.29, 16.24, 16.24, 0.15); border-radius: 20px; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
-                    <div style="width: 354px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Entretien(s) max par étudiant : <?php echo $user['nb_max_entretiens'] ?></div>
+                    <div style="width: 354px; height: 31px; color: black; font-size: 18px; font-family: Noto Sans; font-weight: 400; word-wrap: break-word">Entretien(s) max par étudiant : <?php echo $user['nb_max_entretiens']; ?></div>
 
                 </div>
             </div>

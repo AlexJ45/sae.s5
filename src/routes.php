@@ -21,7 +21,11 @@ $routes = [
         'method' => ['GET', 'POST'],
         'script' => 'responsable/dashboard.php',
     ],
-
+    [
+        'route' => ['/responsable/pdf'],
+        'method' => ['GET'],
+        'script' => 'responsable/generate_pdf.php',
+    ],
     [
         'route' => ['/404'],
         'method' => ['GET'],
